@@ -10,15 +10,11 @@ function MillenniumFalconSpaceship(props) {
     if (group.current) {
       const time = state.clock.elapsedTime;
       
-      // Complex left-right movement with varying speed
-      group.current.position.x = 1.3 + 
-        Math.sin(time * 0.7) * 0.4 + 
-        Math.sin(time * 1.3) * 0.15;
+      // Gentle left-right movement 
+      group.current.position.x = Math.sin(time * 0.5) * 0.3;
       
-      // Vertical hovering in middle of screen
-      group.current.position.y = 0.2 + 
-        Math.sin(time * 0.5) * 0.25 + 
-        Math.cos(time * 0.9) * 0.1;
+      // Gentle vertical hovering
+      group.current.position.y = Math.sin(time * 0.3) * 0.2;
       
       // Realistic banking and pitch movements
       group.current.rotation.z = Math.sin(time * 0.6) * 0.08 + Math.cos(time * 1.1) * 0.03;
@@ -30,9 +26,9 @@ function MillenniumFalconSpaceship(props) {
   return (
     <group ref={group} {...props}>
       {/* Lighting */}
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 5, 5]} intensity={1.0} />
-      <pointLight position={[2, 2, 2]} intensity={0.8} color="#ffffff" />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[5, 5, 5]} intensity={1.2} />
+      <pointLight position={[2, 2, 2]} intensity={1.0} color="#ffffff" />
       
       {/* Main body - Millennium Falcon style */}
       <mesh rotation={[0, 0, Math.PI / 2]}>
