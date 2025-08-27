@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/Portfolio/', // Required for GitHub Pages
   define: {
     // Suppress console warnings in development
     __SUPPRESS_CONSOLE_WARNINGS__: JSON.stringify(true),
