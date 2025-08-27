@@ -26,18 +26,11 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           three: ['three', '@react-three/fiber', '@react-three/drei'],
-          motion: ['motion'],
-          utils: ['maath', 'cobe', 'tailwind-merge'],
-          email: ['@emailjs/browser']
+          motion: ['motion']
         }
       }
     }
   },
   assetsInclude: ['**/*.glb', '**/*.gltf'],
-  server: {
-    headers: {
-      'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Cross-Origin-Opener-Policy': 'same-origin'
-    }
-  }
+
 });
