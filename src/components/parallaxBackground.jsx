@@ -9,15 +9,18 @@ const ParallaxBackground = () => {
   const mountain1Y = useTransform(x, [0, 0.5], ["0%", "0%"]);
 
   return (
-    <section className="absolute inset-0">
-      <div className="relative h-screen overflow-y-hidden">
+    <section className="absolute inset-0 w-full h-full">
+      <div className="relative w-full h-screen overflow-hidden">
         {/* Background Sky */}
         <div
           className="absolute inset-0 w-full h-screen -z-50"
           style={{
             backgroundImage: "url(/assets/sky.jpg)",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center",
             backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "100vw",
+            minHeight: "100vh",
           }}
         />
         {/* Mountain Layer 3 */}
@@ -25,8 +28,11 @@ const ParallaxBackground = () => {
           className="absolute inset-0 -z-40"
           style={{
             backgroundImage: "url(/assets/mountain-3.png)",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center bottom",
             backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "100vw",
+            minHeight: "100vh",
             y: mountain3Y,
           }}
         />
@@ -35,8 +41,11 @@ const ParallaxBackground = () => {
           className="absolute inset-0 -z-30"
           style={{
             backgroundImage: "url(/assets/planets.png)",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center bottom",
             backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "100vw",
+            minHeight: "100vh",
             x: planetsX,
           }}
         />
@@ -45,18 +54,24 @@ const ParallaxBackground = () => {
           className="absolute inset-0 -z-20"
           style={{
             backgroundImage: "url(/assets/mountain-2.png)",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center bottom",
             backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "100vw",
+            minHeight: "100vh",
             y: mountain2Y,
           }}
         />
-        {/* Mountaine Layer 1 */}
+        {/* Mountain Layer 1 */}
         <motion.div
           className="absolute inset-0 -z-10"
           style={{
             backgroundImage: "url(/assets/mountain-1.png)",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center bottom",
             backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "100vw",
+            minHeight: "100vh",
             y: mountain1Y,
           }}
         />

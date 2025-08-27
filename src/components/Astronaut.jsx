@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
-// Simple, reliable spaceship component
+// Millennium Falcon spaceship component
 function MillenniumFalconSpaceship(props) {
   const group = useRef();
   
@@ -10,11 +10,15 @@ function MillenniumFalconSpaceship(props) {
     if (group.current) {
       const time = state.clock.elapsedTime;
       
-      // Gentle left-right movement 
-      group.current.position.x = Math.sin(time * 0.5) * 0.3;
+      // Complex left-right movement with varying speed
+      group.current.position.x = 1.3 + 
+        Math.sin(time * 0.7) * 0.4 + 
+        Math.sin(time * 1.3) * 0.15;
       
-      // Gentle vertical hovering
-      group.current.position.y = Math.sin(time * 0.3) * 0.2;
+      // Vertical hovering in middle of screen
+      group.current.position.y = 0.2 + 
+        Math.sin(time * 0.5) * 0.25 + 
+        Math.cos(time * 0.9) * 0.1;
       
       // Realistic banking and pitch movements
       group.current.rotation.z = Math.sin(time * 0.6) * 0.08 + Math.cos(time * 1.1) * 0.03;

@@ -29,8 +29,8 @@ const Hero = () => {
           <Suspense fallback={<Loader />}>
             <Float>
               <Astronaut
-                scale={isMobile ? 0.8 : 1.5}
-                position={isMobile ? [0, -1, 0] : [2, 0, 0]}
+                scale={isMobile ? 0.23 : 0.5}
+                position={isMobile ? [0, -1.5, 0] : [1.3, 0.2, 0]}
               />
             </Float>
             <Rig />
@@ -45,7 +45,7 @@ function Rig() {
   return useFrame((state, delta) => {
     easing.damp3(
       state.camera.position,
-      [state.mouse.x / 10, 1 + state.mouse.y / 10, 3],
+      [state.mouse.x / 10, 1 + state.mouse.y / 10, state.camera.position.z],
       0.5,
       delta
     );
