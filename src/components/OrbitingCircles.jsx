@@ -35,10 +35,14 @@ export function OrbitingCircles({
         return (
           <div
             style={{
-              "--duration": calculatedDuration,
+              "--duration": `${calculatedDuration}s`,
               "--radius": radius,
               "--angle": angle,
               "--icon-size": `${iconSize}px`,
+              left: "50%",
+              top: "50%",
+              marginLeft: `calc(var(--icon-size) / -2)`,
+              marginTop: `calc(var(--icon-size) / -2)`,
             }}
             className={twMerge(
               `absolute flex size-[var(--icon-size)] transform-gpu animate-orbit items-center justify-center rounded-full ${

@@ -1,33 +1,36 @@
 export const myProjects = [
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "FoodieLocal",
     description:
-      "Facilitates purchases from international websites like Amazon and eBay, allowing customers to shop from these sites and have products delivered domestically.",
+      "A full-stack web application that connects home chefs with nearby customers for fresh, home-cooked meal delivery.",
     subDescription: [
-      "Built a scalable application with ASP.NET Core MVC, integrating global platforms like Amazon for domestic delivery.",
-      "Implemented secure authentication and database management using ASP.NET Core Identity and Entity Framework Core.",
-      "Designed a responsive frontend with Tailwind CSS, enhancing user experience.",
-      "Added payment systems, localization, and product filtering for functionality improvements.",
+      "Developed a full-stack web application using the MERN stack to connect home chefs with nearby customers for fresh meal delivery.",
+
+      "Implemented secure authentication and authorization with JWT and bcrypt to ensure safe user access.",
+
+      "Designed dynamic dashboards for chefs and customers, featuring booking history, order status, and real-time updates.",
+
+      "Integrated MongoDB for scalable data management and built responsive React components for a seamless user experience.",
     ],
-    href: "",
+    href: "https://github.com/CipherSaber/FoodieLocal",
     logo: "",
-    image: "/assets/projects/accessories.jpg",
+    image: "/assets/projects/Fl.png",
     tags: [
       {
         id: 1,
-        name: "C#",
-        path: "/assets/logos/csharp.svg",
+        name: "HTML",
+        path: "/assets/logos/html5.svg",
       },
       {
         id: 2,
-        name: ".Net",
-        path: "/assets/logos/dotnet.svg",
+        name: "MongoBD",
+        path: "/assets/logos/mongo.svg",
       },
       {
         id: 3,
-        name: "Ef Core",
-        path: "/assets/logos/efcore.png",
+        name: "React",
+        path: "/assets/logos/react.svg",
       },
       {
         id: 4,
@@ -38,23 +41,26 @@ export const myProjects = [
   },
   {
     id: 2,
-    title: "Authentication & Authorization System",
+    title: "PixelFuel",
     description:
-      "A secure authentication and authorization system using Auth0 for seamless user management.",
+      "This platform allows users to browse, book, and pay for game-related services such as game coaching, tournaments, item rentals, and more — all while managing ratings, reviews, and booking history.",
     subDescription: [
-      "Integrated Auth0 for authentication, supporting OAuth, JWT, and multi-factor authentication.",
-      "Implemented role-based access control (RBAC) for fine-grained user permissions.",
-      "Developed a React-based frontend with Tailwind CSS for a sleek user experience.",
-      "Connected to a secure SQLite database for user data storage.",
+      "Built a full-stack marketplace web app inspired by Urban Company, tailored for the gaming ecosystem.",
+
+      "Enabled users to browse, book, and pay for services like coaching, tournaments, and item rentals.",
+
+      "Implemented ratings, reviews, and booking history to enhance trust and user engagement.",
+
+      "Developed with the MERN stack for scalability, secure transactions, and responsive UI/UX."
     ],
-    href: "",
+    href: "https://github.com/CipherSaber/PixelFuel",
     logo: "",
-    image: "/assets/projects/auth-system.jpg",
+    image: "/assets/projects/PF.png",
     tags: [
       {
         id: 1,
-        name: "Auth0",
-        path: "/assets/logos/auth0.svg",
+        name: "JavaScript",
+        path: "/assets/logos/javascript.svg",
       },
       {
         id: 2,
@@ -63,8 +69,8 @@ export const myProjects = [
       },
       {
         id: 3,
-        name: "SQLite",
-        path: "/assets/logos/sqlite.svg",
+        name: "HTML5",
+        path: "/assets/logos/html5svg",
       },
       {
         id: 4,
@@ -75,254 +81,131 @@ export const myProjects = [
   },
   {
     id: 3,
-    title: "Blazor Web App",
+    title: "PACMAN Clone Using JAVA",
     description:
-      "A modern, interactive web application built with Blazor WebAssembly and .NET Core.",
+      "A Clone of Original Pacman game using JAVA Swing & AWT.",
     subDescription: [
-      "Developed a fully interactive Single Page Application (SPA) using Blazor WebAssembly.",
-      "Implemented API interactions using .NET Core for a robust backend.",
-      "Designed responsive UI components with Tailwind CSS for an enhanced UX.",
-      "Integrated SQLite for efficient client-side database storage.",
+      "Developed a Pac-Man clone in Java with object-oriented programming principles.",
+
+      "Implemented core gameplay mechanics including ghost AI, collision detection, and score tracking.",
+
+      "Designed interactive GUI using Java Swing for a retro-inspired gaming experience.",
+
+      "Optimized game loop and event handling to ensure smooth and responsive gameplay.",
     ],
-    href: "",
+    href: "https://github.com/CipherSaber/PACMAN-Clone",
     logo: "",
-    image: "/assets/projects/blazor-app.jpg",
+    image: "/assets/projects/pm.jpg",
     tags: [
       {
         id: 1,
-        name: "Blazor",
-        path: "/assets/logos/blazor.svg",
-      },
-      {
-        id: 2,
-        name: ".NET Core",
-        path: "/assets/logos/dotnetcore.svg",
-      },
-      {
-        id: 3,
-        name: "SQLite",
-        path: "/assets/logos/sqlite.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
+        name: "Java",
+        path: "/assets/logos/java.svg",
       },
     ],
   },
   {
     id: 4,
-    title: "C++ Game Engine",
+    title: "LLM to detect vulnerbilites in FOSS",
     description:
-      "A lightweight C++ game engine designed for 2D and 3D game development.",
+      "LLM that scan the FOSS software for vulnerbilites and help eliminate the malware in early stages of development",
     subDescription: [
-      "Built a powerful rendering engine using OpenGL and C++.",
-      "Developed a physics engine with collision detection and particle effects.",
-      "Implemented a scripting system for easy game customization.",
-      "Optimized performance with multi-threading and efficient memory management.",
+      "In Progress",
     ],
     href: "",
     logo: "",
-    image: "/assets/projects/game-engine.jpg",
+    image: "/assets/projects/wip.jpg",
     tags: [
-      {
-        id: 1,
-        name: "C++",
-        path: "/assets/logos/cplusplus.svg",
-      },
-      {
-        id: 2,
-        name: "C#",
-        path: "/assets/logos/csharp.svg",
-      },
-      {
-        id: 3,
-        name: "Git",
-        path: "/assets/logos/git.svg",
-      },
-      {
-        id: 4,
-        name: "Microsoft",
-        path: "/assets/logos/microsoft.svg",
-      },
     ],
   },
   {
     id: 5,
-    title: "WordPress Custom Theme",
+    title: "Emitter location enhancement in GIS using AI",
     description:
-      "A fully customizable WordPress theme optimized for performance and SEO.",
+      "A web application for emitter location enhancement",
     subDescription: [
-      "Developed a responsive WordPress theme using HTML5, CSS3, and JavaScript.",
-      "Integrated Tailwind CSS for modern styling and UI enhancements.",
-      "Optimized SEO and page speed using Vite.js for fast builds.",
-      "Implemented custom widgets and plugin compatibility for extended functionality.",
+      "In Progress",
     ],
     href: "",
     logo: "",
-    image: "/assets/projects/wordpress-theme.jpg",
+    image: "/assets/projects/wip.jpg",
     tags: [
-      {
-        id: 1,
-        name: "WordPress",
-        path: "/assets/logos/wordpress.svg",
-      },
-      {
-        id: 2,
-        name: "HTML5",
-        path: "/assets/logos/html5.svg",
-      },
-      {
-        id: 3,
-        name: "CSS3",
-        path: "/assets/logos/css3.svg",
-      },
-      {
-        id: 4,
-        name: "Vite.js",
-        path: "/assets/logos/vitejs.svg",
-      },
     ],
   },
+];
+
+export const certifications = [
   {
-    id: 6,
-    title: "Online Learning Platform",
-    description:
-      "A web application that allows users to enroll in courses, watch video lectures, and take quizzes.",
-    subDescription: [
-      "Built using Blazor WebAssembly for a seamless SPA experience.",
-      "Implemented video streaming with Azure Media Services.",
-      "Added a quiz system with dynamic question generation and real-time grading.",
-      "Integrated Stripe API for secure payment processing.",
-    ],
-    href: "",
-    logo: "",
-    image: "/assets/projects/elearning.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Blazor",
-        path: "/assets/logos/blazor.svg",
-      },
-      {
-        id: 2,
-        name: "Azure",
-        path: "/assets/logos/azure.svg",
-      },
-      {
-        id: 3,
-        name: "Stripe",
-        path: "/assets/logos/stripe.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
-    ],
+    id: 1,
+    title: "Cybersecurity	Analyst",
+    issuer: "TATA",
+    date: "2024",
+    description: "Analyze the vulnerbilites and counter the malicious activity",
+    href: "https://www.linkedin.com/in/jacob-ashirwad07/details/certifications/"
+  },
+  {
+    id: 2,
+    title: "Blockchain and its application",
+    issuer: "NPTEL",
+    date: "2025",
+    description: "Foundational understanding of Blockchain.",
+    href: "https://www.linkedin.com/in/jacob-ashirwad07/details/certifications/",
+  },
+  {
+    id: 3,
+    title: "Unity 3D Essentials",
+    issuer: "Unity",
+    date: "2025",
+    description: "A complete guide on Unity 3D and guide to game dev career.",
+    href: "https://www.linkedin.com/in/jacob-ashirwad07/details/certifications/",
+  },
+  {
+    id: 4,
+    title: "Skill-up in AI Fundamentals",
+    issuer: "Microsoft",
+    date: "2023",
+    description: "Certificate consisting of AI fundamentals and Azure Cloud.",
+    href: "https://www.linkedin.com/in/jacob-ashirwad07/details/certifications/",
   },
 ];
 
 export const mySocials = [
   {
-    name: "WhatsApp",
-    href: "",
-    icon: "/assets/socials/whatsApp.svg",
-  },
-  {
     name: "Linkedin",
-    href: "https://www.linkedin.com/in/ali-sanati/",
+    href: "https://www.linkedin.com/in/jacob-ashirwad07/",
     icon: "/assets/socials/linkedIn.svg",
   },
   {
-    name: "Instagram",
-    href: "https://www.instagram.com/ali.sanatidev/reels/",
-    icon: "/assets/socials/instagram.svg",
+    name: "Github",
+    href: "https://github.com/CipherSaber",
+    icon: "/assets/socials/github.svg",
   },
 ];
 
 export const experiences = [
   {
-    title: "Software Developer",
-    job: "Security & Defense Projects",
-    date: "2021-2023",
+    title: "Software Developer Intern",
+    job: "Cognifyz Technologies",
+    date: "June 2024 – July 2024",
     contents: [
-      "Enhanced application security and developed new features, adhering to standards set by the Passive Defense Organization and National Cyberspace Center.",
-      "Designed and implemented intuitive map interfaces using MapsUI, enhancing user experience and enabling seamless interactive map integration.",
-      "Developed applications for industrial automation, leveraging C++ and the Fatek API for PLC communication.",
-      "Enhanced responsiveness and usability of applications using Windows Forms and WPF frameworks.",
-      "Executed XML to SVG conversions using X-DOM, ensuring dynamic and efficient data visualization.",
+      "Completed a software development internship focused on Python 3.",
+      "Built CLI-based applications including a Pattern Generator, Task Manager, and Temperature Converter.",
+      "Developed an interactive number guessing game with real-time input handling.",
+      "Applied logical structures, loops, and error handling to improve code robustness.",
+      "Strengthened practical skills in problem-solving and clean code design.",
     ],
   },
   {
-    title: "Back-End Developer",
-    job: "Car Manufacture",
-    date: "2023-2024",
+    title: "Full-Stack Developer Intern",
+    job: "Infotact Solutions",
+    date: "May 2025 – July 2025",
     contents: [
-      "Engineered systems for large-scale data ingestion and analysis, ensuring efficient data processing and storage.",
-      "Developed back-end systems enabling vehicle-to-cloud communication for telemetry, diagnostics, and remote control:",
-      "✅ Implemented secure APIs, following ISO 26262 automotive safety standards.",
-      "✅ Ensured data privacy for customers and partners through industry-compliant protocols.",
-      "✅ Delivered remote features like over-the-air updates, real-time tracking, and remote start capabilities.",
+      "Built and deployed full-stack projects using the MERN stack.",
+      "Developed 'FoodieLocal', a food ordering application with category-based menus and cart features.",
+      "Created 'PixelFuel', a marketplace for digital gaming services and items.",
+      "Implemented responsive UIs in React and scalable back-end APIs with Node.js and Express.",
+      "Gained hands-on experience in end-to-end deployment and database management with MongoDB.",
     ],
-  },
-  {
-    title: "Freelance Developer",
-    job: "Self-Employed",
-    date: "2025-Present",
-    contents: [
-      "Created a personal portfolio using Three.js, React, Vite, and WebAPI to showcase technical expertise.",
-      "Continuously enhancing technical skills and expanding expertise in modern web development and back-end technologies.",
-    ],
-  },
+  }
 ];
-export const reviews = [
-  {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://robohash.org/jack",
-  },
-  {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://robohash.org/jill",
-  },
-  {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://robohash.org/john",
-  },
-  {
-    name: "Alice",
-    username: "@alice",
-    body: "This is hands down the best thing I've experienced. Highly recommend!",
-    img: "https://robohash.org/alice",
-  },
-  {
-    name: "Bob",
-    username: "@bob",
-    body: "Incredible work! The attention to detail is phenomenal.",
-    img: "https://robohash.org/bob",
-  },
-  {
-    name: "Charlie",
-    username: "@charlie",
-    body: "This exceeded all my expectations. Absolutely stunning!",
-    img: "https://robohash.org/charlie",
-  },
-  {
-    name: "Dave",
-    username: "@dave",
-    body: "Simply breathtaking. The best decision I've made in a while.",
-    img: "https://robohash.org/dave",
-  },
-  {
-    name: "Eve",
-    username: "@eve",
-    body: "So glad I found this. It has changed the game for me.",
-    img: "https://robohash.org/eve",
-  },
-];
+

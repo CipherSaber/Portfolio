@@ -6,125 +6,258 @@ Source: https://sketchfab.com/3d-models/tenhun-falling-spaceman-fanart-9fd80b6a2
 Title: Tenhun Falling spaceman (FanArt)
 */
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, Suspense } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useMotionValue, useSpring } from "motion/react";
 import { useFrame } from "@react-three/fiber";
 
-export function Astronaut(props) {
+function MillenniumFalconModel(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF(
-    "/models/tenhun_falling_spaceman_fanart.glb"
-  );
-  const { actions } = useAnimations(animations, group);
-  useEffect(() => {
-    if (animations.length > 0) {
-      actions[animations[0].name]?.play();
-    }
-  }, [actions, animations]);
+  const bulletsRef = useRef(new Array(16).fill(null));
+  
+  try {
+    const { nodes, materials, animations } = useGLTF("/models/millennium_falcon.glb");
+    const { actions } = useAnimations(animations, group);
+    
+    console.log("Millennium Falcon loaded:", { nodes, materials, animations });
+    
+    // Enhance materials for better color visibility
+    useEffect(() => {
+      if (materials) {
+        Object.values(materials).forEach((material) => {
+          if (material.isMeshStandardMaterial) {
+            // Increase emissive to make colors more visible
+            material.emissive.setHex(0x222222);
+            material.emissiveIntensity = 0.1;
+            // Reduce metalness for better color visibility
+            material.metalness = Math.min(material.metalness, 0.3);
+            material.roughness = Math.max(material.roughness, 0.7);
+          }
+        });
+      }
+    }, [materials]);
+    
+    useEffect(() => {
+      if (animations && animations.length > 0) {
+        actions[animations[0].name]?.play();
+      }
+    }, [actions, animations]);
 
-  const yPosition = useMotionValue(5);
-  const ySpring = useSpring(yPosition, { damping: 30 });
-  useEffect(() => {
-    ySpring.set(-1);
-  }, [ySpring]);
-  useFrame(() => {
-    group.current.position.y = ySpring.get();
+    // Hovering animation - gentle left-right and up-down movement
+    useFrame((state) => {
+      if (group.current) {
+        // Realistic flying motion - positioned in middle
+        const time = state.clock.elapsedTime;
+        
+        // Complex left-right movement with varying speed
+        group.current.position.x = 1.3 + 
+          Math.sin(time * 0.7) * 0.4 + 
+          Math.sin(time * 1.3) * 0.15;
+        
+        // Vertical hovering in middle of screen
+        group.current.position.y = 0.2 + 
+          Math.sin(time * 0.5) * 0.25 + 
+          Math.cos(time * 0.9) * 0.1;
+        
+        // Realistic banking and pitch movements
+        group.current.rotation.z = Math.sin(time * 0.6) * 0.08 + Math.cos(time * 1.1) * 0.03;
+        group.current.rotation.x = Math.sin(time * 0.4) * 0.04;
+        group.current.rotation.y = -Math.PI / 4 + Math.PI + Math.sin(time * 0.3) * 0.06;
+        
+        // Animate bullets
+        bulletsRef.current.forEach((bullet, index) => {
+          if (bullet) {
+            bullet.position.z += 0.5; // Move bullets forward
+            bullet.position.x += Math.sin(state.clock.elapsedTime * 2 + index) * 0.02; // Slight wobble
+            
+            // Reset bullet position when it goes too far
+            if (bullet.position.z > 10) {
+              bullet.position.z = 1 + (index % 6) * 0.5;
+              bullet.position.x = 0.2 + (index % 6) * 0.1;
+              bullet.position.y = 0;
+            }
+          }
+        });
+      }
+    });
+
+    return (
+      <group
+        ref={group}
+        {...props}
+        dispose={null}
+        rotation={[0, -Math.PI / 4 + Math.PI, 0]}
+        scale={props.scale || 0.274}
+        position={props.position || [1.3, -1, 0]}
+      >
+        {/* Add lighting to the model */}
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} />
+        <pointLight position={[2, 2, 2]} intensity={0.5} color="#ffffff" />
+        
+        <primitive object={nodes.Scene || nodes.RootNode || Object.values(nodes)[0]} />
+        
+        {/* Red laser bullets - More Visible */}
+        {[...Array(6)].map((_, i) => (
+          <mesh
+            key={i}
+            ref={(el) => (bulletsRef.current[i] = el)}
+            position={[
+              0.2 + i * 0.1,
+              0,
+              1 + i * 0.5
+            ]}
+          >
+            <cylinderGeometry args={[0.05, 0.05, 0.4]} />
+            <meshBasicMaterial 
+              color="#FF0000" 
+              emissive="#FF0000" 
+              emissiveIntensity={1.0}
+            />
+          </mesh>
+        ))}
+        
+        {/* Bullet trails for better visibility */}
+        {[...Array(6)].map((_, i) => (
+          <mesh
+            key={`trail-${i}`}
+            ref={(el) => (bulletsRef.current[i + 6] = el)}
+            position={[
+              0.2 + i * 0.1,
+              0,
+              1 + i * 0.5
+            ]}
+          >
+            <cylinderGeometry args={[0.08, 0.08, 0.3]} />
+            <meshBasicMaterial 
+              color="#FF6666" 
+              emissive="#FF0000" 
+              emissiveIntensity={0.5}
+              transparent={true}
+              opacity={0.6}
+            />
+          </mesh>
+        ))}
+      </group>
+    );
+  } catch (error) {
+    console.error("Error loading Millennium Falcon:", error);
+    return <FallbackSpaceship {...props} />;
+  }
+}
+
+function FallbackSpaceship(props) {
+  const group = useRef();
+  const bulletsRef = useRef(new Array(16).fill(null));
+  
+  // Realistic flying animation - same as main model
+  useFrame((state) => {
+    if (group.current) {
+      // Realistic flying motion - positioned in middle
+      const time = state.clock.elapsedTime;
+      
+      // Complex left-right movement with varying speed
+      group.current.position.x = 1.3 + 
+        Math.sin(time * 0.7) * 0.4 + 
+        Math.sin(time * 1.3) * 0.15;
+      
+      // Vertical hovering in middle of screen
+      group.current.position.y = 0.2 + 
+        Math.sin(time * 0.5) * 0.25 + 
+        Math.cos(time * 0.9) * 0.1;
+      
+      // Realistic banking and pitch movements
+      group.current.rotation.z = Math.sin(time * 0.6) * 0.08 + Math.cos(time * 1.1) * 0.03;
+      group.current.rotation.x = Math.sin(time * 0.4) * 0.04;
+      group.current.rotation.y = Math.sin(time * 0.3) * 0.06;
+      
+      // Animate bullets
+      bulletsRef.current.forEach((bullet, index) => {
+        if (bullet) {
+          bullet.position.z += 0.4;
+          bullet.position.y += Math.sin(state.clock.elapsedTime * 3 + index) * 0.03;
+          
+          if (bullet.position.z > 8) {
+            bullet.position.z = -1 - (index % 8) * 0.3;
+            bullet.position.x = Math.random() * 0.6 - 0.3;
+            bullet.position.y = Math.random() * 0.3 - 0.15;
+          }
+        }
+      });
+    }
   });
+
   return (
     <group
       ref={group}
       {...props}
-      dispose={null}
-      rotation={[-Math.PI / 2, -0.2, 2.2]}
-      scale={props.scale || 0.3}
+      scale={props.scale || 0.274}
       position={props.position || [1.3, -1, 0]}
     >
-      <group name="Sketchfab_Scene">
-        <group name="Sketchfab_model">
-          <group name="Root">
-            <group name="metarig">
-              <primitive object={nodes.metarig_rootJoint} />
-              <skinnedMesh
-                name="Cube001_0"
-                geometry={nodes.Cube001_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube001_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube005_0"
-                geometry={nodes.Cube005_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube005_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube002_0"
-                geometry={nodes.Cube002_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube002_0.skeleton}
-              />
-              <skinnedMesh
-                name="Plane_0"
-                geometry={nodes.Plane_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Plane_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube008_0"
-                geometry={nodes.Cube008_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube008_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube004_0"
-                geometry={nodes.Cube004_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube004_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube003_0"
-                geometry={nodes.Cube003_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube003_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube_0"
-                geometry={nodes.Cube_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube009_0"
-                geometry={nodes.Cube009_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube009_0.skeleton}
-              />
-              <skinnedMesh
-                name="Cube011_0"
-                geometry={nodes.Cube011_0.geometry}
-                material={materials["AstronautFallingTexture.png"]}
-                skeleton={nodes.Cube011_0.skeleton}
-              />
-              <group name="Cube001" />
-              <group name="Cube005" />
-              <group name="Cube002" />
-              <group name="Plane" />
-              <group name="Cube008" />
-              <group name="Cube004" />
-              <group name="Cube003" />
-              <group name="Cube" />
-              <group
-                name="Cube009"
-                rotation={[-2.708, 0.013, -1.447]}
-                scale={1.307}
-              />
-              <group name="Cube011" />
-            </group>
-          </group>
-        </group>
-      </group>
+      {/* Simple Millennium Falcon-like spaceship - White */}
+      <mesh>
+        <cylinderGeometry args={[1, 0.8, 0.3, 8]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+      
+      {/* Cockpit - Light gray for contrast */}
+      <mesh position={[0.6, 0.2, 0]}>
+        <sphereGeometry args={[0.3]} />
+        <meshBasicMaterial color="#E0E0E0" />
+      </mesh>
+      
+      {/* Side mandibles - White */}
+      <mesh position={[-0.4, 0, 0.4]} rotation={[0, 0, 0.3]}>
+        <boxGeometry args={[0.8, 0.2, 0.15]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+      <mesh position={[-0.4, 0, -0.4]} rotation={[0, 0, -0.3]}>
+        <boxGeometry args={[0.8, 0.2, 0.15]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+      
+      {/* Engine glow - Blue for contrast */}
+      <mesh position={[-1, 0, 0]}>
+        <cylinderGeometry args={[0.1, 0.15, 0.2]} />
+        <meshBasicMaterial color="#00BFFF" />
+      </mesh>
+      
+      {/* Add some detail lines in gray */}
+      <mesh position={[0, 0, 0]}>
+        <torusGeometry args={[0.9, 0.02, 8, 16]} />
+        <meshBasicMaterial color="#CCCCCC" />
+      </mesh>
+      
+      {/* Red laser bullets for fallback */}
+      {[...Array(6)].map((_, i) => (
+        <mesh
+          key={i}
+          ref={(el) => (bulletsRef.current[i] = el)}
+          position={[
+            Math.random() * 0.4 - 0.2,
+            Math.random() * 0.2 - 0.1,
+            -2 - i * 0.5
+          ]}
+        >
+          <cylinderGeometry args={[0.02, 0.02, 0.2]} />
+          <meshBasicMaterial color="#FF0000" emissive="#FF0000" emissiveIntensity={0.5} />
+        </mesh>
+      ))}
     </group>
   );
 }
 
-useGLTF.preload("/models/tenhun_falling_spaceman_fanart.glb");
+export function Astronaut(props) {
+  return (
+    <Suspense fallback={<FallbackSpaceship {...props} />}>
+      <MillenniumFalconModel {...props} />
+    </Suspense>
+  );
+}
+
+// Preload the Millennium Falcon model
+try {
+  useGLTF.preload("/models/millennium_falcon.glb");
+} catch (error) {
+  console.log("Millennium Falcon model not available for preload");
+}

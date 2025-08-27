@@ -28,30 +28,33 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      console.log("From submitted:", formData);
+      console.log("Form submitted:", formData);
+
+      // Send email using EmailJS
       await emailjs.send(
-        "service_79b0nyj",
-        "template_17us8im",
+        "service_2uz561n", // Your service ID
+        "template_ahfp93c", // Your template ID
         {
           from_name: formData.name,
-          to_name: "Ali",
           from_email: formData.email,
-          to_email: "AliSanatiDev@gmail.com",
+          to_name: "Jacob",
           message: formData.message,
         },
-        "pn-Bw_mS1_QQdofuV"
+        "lg-JoZn5tol21zgu5" // Your public key
       );
+
       setIsLoading(false);
       setFormData({ name: "", email: "", message: "" });
-      showAlertMessage("success", "You message has been sent!");
+      showAlertMessage("success", "Message sent successfully! I'll get back to you soon.");
+
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
-      showAlertMessage("danger", "Somthing went wrong!");
+      console.error("EmailJS Error:", error);
+      showAlertMessage("danger", "Failed to send message. Please try again or contact me directly.");
     }
   };
   return (
-    <section className="relative flex items-center c-space section-spacing">
+    <section className="relative flex items-center c-space section-spacing" id="contact">
       <Particles
         className="absolute inset-0 -z-50"
         quantity={100}
@@ -64,13 +67,13 @@ const Contact = () => {
         <div className="flex flex-col items-start w-full gap-5 mb-10">
           <h2 className="text-heading">Let's Talk</h2>
           <p className="font-normal text-neutral-400">
-            Whether you're loking to build a new website, improve your existing
-            platform, or bring a unique project to life, I'm here to help
+            Whether you're looking to build a new website, improve your existing
+            platform, or bring a unique project to life, I'm here to help.
           </p>
         </div>
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="mb-5">
-            <label htmlFor="name" className="feild-label">
+            <label htmlFor="name" className="field-label">
               Full Name
             </label>
             <input
@@ -86,7 +89,7 @@ const Contact = () => {
             />
           </div>
           <div className="mb-5">
-            <label htmlFor="email" className="feild-label">
+            <label htmlFor="email" className="field-label">
               Email
             </label>
             <input
@@ -102,7 +105,7 @@ const Contact = () => {
             />
           </div>
           <div className="mb-5">
-            <label htmlFor="message" className="feild-label">
+            <label htmlFor="message" className="field-label">
               Message
             </label>
             <textarea

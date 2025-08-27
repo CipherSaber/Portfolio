@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap");
 @import "tailwindcss";
-@theme {
+
+:root {
   --color-primary: #030412;
   --color-midnight: #06091f;
   --color-navy: #161a31;
@@ -14,39 +15,42 @@
   --color-orange: #cc6033;
   --color-sand: #d6995c;
   --color-coral: #ea4884;
-  --animate-orbit: orbit 50s linear infinite;
-  @keyframes orbit {
-    0% {
-      transform: rotate(calc(var(--angle) * 1deg))
-        translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
-    }
-    100% {
-      transform: rotate(calc(var(--angle) * 1deg + 360deg))
-        translateY(calc(var(--radius) * 1px))
-        rotate(calc((var(--angle) * -1deg) - 360deg));
-    }
-  }
-  --animate-marquee: marquee 50s linear infinite;
-  --animate-marquee-vertical: marquee-vertical 50s linear infinite;
+}
 
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - var(--gap)));
-    }
+@keyframes orbit {
+  0% {
+    transform: rotate(calc(var(--angle) * 1deg)) translateX(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
   }
 
-  @keyframes marquee-vertical {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(calc(-100% - var(--gap)));
-    }
+  100% {
+    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateX(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
   }
 }
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+.animate-orbit {
+  animation: orbit var(--duration, 20s) linear infinite;
+}
+
 body {
   background: #030412;
   font-family: "Funnel Display", sans-serif;
@@ -56,7 +60,7 @@ body {
 }
 
 .c-space {
-  @apply sm:px-10 px-5 lg:px-15;
+  @apply sm:px-10 px-5 lg:px-16;
 }
 
 .hover-animation {
@@ -64,7 +68,7 @@ body {
 }
 
 .section-spacing {
-  @apply min-h-screen mt-20 md:mt-30;
+  @apply min-h-screen mt-20 md:mt-32;
 }
 
 .text-heading {
@@ -76,7 +80,7 @@ body {
 }
 
 .subtext {
-  @apply text-neutral-400 text-sm md:text-base text-pretty;
+  @apply text-neutral-400 text-sm md:text-base;
 }
 
 /* Navigation */
@@ -91,35 +95,41 @@ body {
 .nav-link {
   @apply text-lg md:text-base hover:text-white transition-colors;
 }
+
 /* Button Components */
 .btn {
-  @apply relative px-1 py-4 text-sm text-center rounded-full font-extralight bg-primary w-[12rem] cursor-pointer overflow-hidden;
+  @apply relative px-1 py-4 text-sm text-center rounded-full font-extralight bg-slate-900 w-[12rem] cursor-pointer overflow-hidden;
 }
 
 /* About Section */
 .grid-1 {
   @apply row-span-2 md:col-span-3 h-[15rem] md:h-full relative overflow-hidden hover:-translate-y-1 duration-200;
 }
+
 .grid-2 {
   @apply row-span-1 md:col-span-3 h-[15rem] md:h-full relative overflow-hidden hover:-translate-y-1 duration-200;
 }
+
 .grid-3 {
   @apply row-span-1 md:col-span-3 h-[15rem] md:h-full relative overflow-hidden hover:-translate-y-1 duration-200;
 }
+
 .grid-4 {
   @apply row-span-1 md:col-span-2 h-[15rem] md:h-full relative overflow-hidden hover:-translate-y-1 duration-200;
 }
+
 .grid-5 {
   @apply row-span-1 md:col-span-4 h-[15rem] md:h-full relative overflow-hidden hover:-translate-y-1 duration-200;
 }
 
 .grid-default-color {
-  @apply p-6 bg-gradient-to-b from-storm to-indigo rounded-2xl;
+  @apply p-6 bg-gradient-to-b from-slate-700 to-indigo-800 rounded-2xl;
 }
 
 .grid-special-color {
-  @apply p-6 bg-gradient-to-b from-royal to-lavender rounded-2xl;
+  @apply p-6 bg-gradient-to-b from-purple-700 to-purple-500 rounded-2xl;
 }
+
 .grid-black-color {
   @apply p-6 bg-gradient-to-tl from-[#3A3A3A] via-[#242424] to-[#3A3A3A] rounded-2xl;
 }
