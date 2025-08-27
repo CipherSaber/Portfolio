@@ -57,10 +57,11 @@ body {
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  position: relative;
 }
 
 .c-space {
-  @apply sm:px-10 px-5 lg:px-16;
+  @apply sm:px-10 px-5 lg:px-16 relative;
 }
 
 .hover-animation {
