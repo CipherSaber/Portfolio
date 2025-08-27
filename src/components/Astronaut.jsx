@@ -10,6 +10,7 @@ import React, { useEffect, useRef, Suspense } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useMotionValue, useSpring } from "motion/react";
 import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 
 function MillenniumFalconModel(props) {
   const group = useRef();
@@ -213,42 +214,60 @@ function FallbackSpaceship(props) {
       <directionalLight position={[5, 5, 5]} intensity={1.0} />
       <pointLight position={[2, 2, 2]} intensity={0.8} color="#ffffff" />
       
-      {/* Simple Millennium Falcon-like spaceship - Brighter White */}
+      {/* Main body - Millennium Falcon style */}
+      <mesh rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.8, 1.2, 0.4, 6]} />
+        <meshBasicMaterial color="#F0F0F0" />
+      </mesh>
+      
+      {/* Central disc */}
       <mesh>
-        <cylinderGeometry args={[1.2, 1, 0.4, 8]} />
-        <meshBasicMaterial 
-          color="#FFFFFF"
-        />
+        <cylinderGeometry args={[0.6, 0.6, 0.2, 16]} />
+        <meshBasicMaterial color="#FFFFFF" />
       </mesh>
       
-      {/* Cockpit - Light gray for contrast */}
-      <mesh position={[0.7, 0.25, 0]}>
-        <sphereGeometry args={[0.4]} />
-        <meshBasicMaterial 
-          color="#E0E0E0"
-        />
+      {/* Cockpit - offset to the right like Millennium Falcon */}
+      <mesh position={[0.8, 0.15, 0]}>
+        <sphereGeometry args={[0.3]} />
+        <meshBasicMaterial color="#D0D0D0" />
       </mesh>
       
-      {/* Side mandibles - White */}
-      <mesh position={[-0.5, 0, 0.5]} rotation={[0, 0, 0.3]}>
-        <boxGeometry args={[1, 0.25, 0.2]} />
-        <meshBasicMaterial 
-          color="#FFFFFF"
-        />
-      </mesh>
-      <mesh position={[-0.5, 0, -0.5]} rotation={[0, 0, -0.3]}>
-        <boxGeometry args={[1, 0.25, 0.2]} />
-        <meshBasicMaterial 
-          color="#FFFFFF"
-        />
+      {/* Cockpit window */}
+      <mesh position={[0.9, 0.2, 0]}>
+        <sphereGeometry args={[0.15]} />
+        <meshBasicMaterial color="#87CEEB" />
       </mesh>
       
-      {/* Engine glow - Bright Blue for contrast */}
-      <mesh position={[-1.2, 0, 0]}>
-        <cylinderGeometry args={[0.15, 0.2, 0.3]} />
-        <meshBasicMaterial 
-          color="#00BFFF"
-        />
+      {/* Forward mandibles - characteristic Millennium Falcon shape */}
+      <mesh position={[-0.6, 0, 0.6]} rotation={[0, 0, 0.2]}>
+        <boxGeometry args={[1.2, 0.3, 0.25]} />
+        <meshBasicMaterial color="#F0F0F0" />
+      </mesh>
+      <mesh position={[-0.6, 0, -0.6]} rotation={[0, 0, -0.2]}>
+        <boxGeometry args={[1.2, 0.3, 0.25]} />
+        <meshBasicMaterial color="#F0F0F0" />
+      </mesh>
+      
+      {/* Mandible tips */}
+      <mesh position={[-1.1, 0, 0.7]}>
+        <boxGeometry args={[0.3, 0.2, 0.15]} />
+        <meshBasicMaterial color="#E0E0E0" />
+      </mesh>
+      <mesh position={[-1.1, 0, -0.7]}>
+        <boxGeometry args={[0.3, 0.2, 0.15]} />
+        <meshBasicMaterial color="#E0E0E0" />
+      </mesh>
+      
+      {/* Rear engines */}
+      <mesh position={[0.8, 0, 0]}>
+        <cylinderGeometry args={[0.1, 0.15, 0.4]} />
+        <meshBasicMaterial color="#4169E1" />
+      </mesh>
+      
+      {/* Engine glow effects */}
+      <mesh position={[1.0, 0, 0]}>
+        <cylinderGeometry args={[0.05, 0.1, 0.2]} />
+        <meshBasicMaterial color="#00BFFF" />
       </mesh>
       
       {/* Add some detail lines in gray */}
@@ -277,11 +296,21 @@ function FallbackSpaceship(props) {
 }
 
 export function Astronaut(props) {
+  // Use fallback spaceship as primary since 3D model has compatibility issues
+  const [useModel, setUseModel] = React.useState(false);
+  
+  // For now, use the reliable fallback spaceship
+  // The 3D model has GLTF extension compatibility issues in production
+  return <FallbackSpaceship {...props} />;
+  
+  // Uncomment below to try loading the 3D model again
+  /*
   return (
     <Suspense fallback={<FallbackSpaceship {...props} />}>
       <MillenniumFalconModel {...props} />
     </Suspense>
   );
+  */
 }
 
 // Preload the Millennium Falcon model with error handling
