@@ -10,15 +10,24 @@ import Footer from './sections/Footer.jsx';
 
 const App = () => {
   return (
-    <div className="container mx-auto max-w-7xl relative">
-      <Navbar />
+    <div className="relative">
+      {/* Navbar - Full width */}
+      <div className="container mx-auto max-w-7xl relative">
+        <Navbar />
+      </div>
+      
+      {/* Hero - Full width */}
       <Hero />
-      <About />
-      <Projects />
-      <Experiences />
-      <Certifications />
-      <Contact />
-      <Footer/>
+      
+      {/* Other sections - Contained width */}
+      <div className="container mx-auto max-w-7xl relative">
+        <About />
+        <Projects />
+        <Experiences />
+        <Certifications />
+        <Contact />
+        <Footer/>
+      </div>
     </div>
   );
 };

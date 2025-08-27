@@ -58,10 +58,55 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
   position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Full-width container for homepage */
+.hero-container {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .c-space {
   @apply sm:px-10 px-5 lg:px-16 relative;
+}
+
+/* Responsive spaceship positioning */
+.spaceship-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+
+/* Ensure text is properly positioned */
+.hero-text-container {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: none;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .hero-text-container {
+    padding: 0 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-text-container {
+    padding: 0 4rem;
+  }
 }
 
 .hover-animation {

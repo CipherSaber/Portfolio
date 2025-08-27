@@ -5,20 +5,18 @@ import { useFrame } from "@react-three/fiber";
 function MillenniumFalconSpaceship(props) {
   const group = useRef();
   
-  // Realistic flying animation
+  // Realistic flying animation with responsive positioning
   useFrame((state) => {
     if (group.current) {
       const time = state.clock.elapsedTime;
       
-      // Complex left-right movement with varying speed
-      group.current.position.x = 1.3 + 
-        Math.sin(time * 0.7) * 0.4 + 
-        Math.sin(time * 1.3) * 0.15;
+      // Get the base position from props, or use defaults
+      const baseX = props.position?.[0] || 0;
+      const baseY = props.position?.[1] || 0;
       
-      // Vertical hovering in middle of screen
-      group.current.position.y = 0.2 + 
-        Math.sin(time * 0.5) * 0.25 + 
-        Math.cos(time * 0.9) * 0.1;
+      // Gentle movement around the base position
+      group.current.position.x = baseX + Math.sin(time * 0.5) * 0.3;
+      group.current.position.y = baseY + Math.sin(time * 0.3) * 0.2;
       
       // Realistic banking and pitch movements
       group.current.rotation.z = Math.sin(time * 0.6) * 0.08 + Math.cos(time * 1.1) * 0.03;
