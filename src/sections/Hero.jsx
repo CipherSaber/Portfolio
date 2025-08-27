@@ -13,33 +13,40 @@ const Hero = () => {
   const isTablet = useMediaQuery({ maxWidth: 1024 });
   
   return (
-    <section className="hero-container" id="home">
+    <section className="w-full min-h-screen relative overflow-hidden" id="home">
       {/* Background Layer - Full Width */}
       <ParallaxBackground />
       
       {/* Text Layer */}
-      <div className="hero-text-container flex items-start justify-center md:items-start md:justify-start min-h-screen">
+      <div className="relative z-20 flex items-start justify-center md:items-start md:justify-start min-h-screen px-5 sm:px-10 lg:px-16">
         <HeroText />
       </div>
       
       {/* 3D Canvas Layer - Full Width */}
-      <figure className="spaceship-canvas">
+      <figure className="absolute inset-0 z-10 w-full h-full">
         <Canvas 
           camera={{ 
-            position: [0, 1, 3],
-            fov: isMobile ? 60 : 50
+            position: [0, 0, 5],
+            fov: isMobile ? 75 : 60,
+            near: 0.1,
+            far: 1000
           }}
+          style={{ width: '100%', height: '100%' }}
         >
           <Suspense fallback={<Loader />}>
-            <Float>
+            <Float
+              speed={1.5}
+              rotationIntensity={0.5}
+              floatIntensity={0.5}
+            >
               <Astronaut
-                scale={isMobile ? 0.4 : isTablet ? 0.6 : 0.8}
+                scale={isMobile ? 0.8 : isTablet ? 1.2 : 1.5}
                 position={
                   isMobile 
-                    ? [0, -0.5, 0] 
+                    ? [0, -1, 0] 
                     : isTablet 
-                    ? [1.0, 0, 0] 
-                    : [1.5, 0.2, 0]
+                    ? [2, -0.5, 0] 
+                    : [3, 0, 0]
                 }
               />
             </Float>
@@ -55,7 +62,7 @@ function Rig() {
   return useFrame((state, delta) => {
     easing.damp3(
       state.camera.position,
-      [state.mouse.x / 10, 1 + state.mouse.y / 10, state.camera.position.z],
+      [state.pointer.x / 10, 1 + state.pointer.y / 10, state.camera.position.z],
       0.5,
       delta
     );
