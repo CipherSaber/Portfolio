@@ -32,12 +32,13 @@ function MillenniumFalconModel(props) {
       if (materials) {
         Object.values(materials).forEach((material) => {
           if (material.isMeshStandardMaterial) {
-            // Increase emissive to make colors more visible
-            material.emissive.setHex(0x222222);
-            material.emissiveIntensity = 0.1;
-            // Reduce metalness for better color visibility
-            material.metalness = Math.min(material.metalness, 0.3);
-            material.roughness = Math.max(material.roughness, 0.7);
+            // Safely set material properties
+            try {
+              material.metalness = Math.min(material.metalness || 0, 0.3);
+              material.roughness = Math.max(material.roughness || 0.7, 0.7);
+            } catch (error) {
+              console.warn("Error setting material properties:", error);
+            }
           }
         });
       }
@@ -127,9 +128,7 @@ function MillenniumFalconModel(props) {
           >
             <cylinderGeometry args={[0.05, 0.05, 0.4]} />
             <meshBasicMaterial 
-              color="#FF0000" 
-              emissive="#FF0000" 
-              emissiveIntensity={1.0}
+              color="#FF0000"
             />
           </mesh>
         ))}
@@ -148,8 +147,6 @@ function MillenniumFalconModel(props) {
             <cylinderGeometry args={[0.08, 0.08, 0.3]} />
             <meshBasicMaterial 
               color="#FF6666" 
-              emissive="#FF0000" 
-              emissiveIntensity={0.5}
               transparent={true}
               opacity={0.6}
             />
@@ -219,40 +216,30 @@ function FallbackSpaceship(props) {
       {/* Simple Millennium Falcon-like spaceship - Brighter White */}
       <mesh>
         <cylinderGeometry args={[1.2, 1, 0.4, 8]} />
-        <meshStandardMaterial 
-          color="#FFFFFF" 
-          emissive="#FFFFFF"
-          emissiveIntensity={0.2}
-          metalness={0.3}
-          roughness={0.7}
+        <meshBasicMaterial 
+          color="#FFFFFF"
         />
       </mesh>
       
       {/* Cockpit - Light gray for contrast */}
       <mesh position={[0.7, 0.25, 0]}>
         <sphereGeometry args={[0.4]} />
-        <meshStandardMaterial 
-          color="#E0E0E0" 
-          emissive="#E0E0E0"
-          emissiveIntensity={0.1}
+        <meshBasicMaterial 
+          color="#E0E0E0"
         />
       </mesh>
       
       {/* Side mandibles - White */}
       <mesh position={[-0.5, 0, 0.5]} rotation={[0, 0, 0.3]}>
         <boxGeometry args={[1, 0.25, 0.2]} />
-        <meshStandardMaterial 
-          color="#FFFFFF" 
-          emissive="#FFFFFF"
-          emissiveIntensity={0.1}
+        <meshBasicMaterial 
+          color="#FFFFFF"
         />
       </mesh>
       <mesh position={[-0.5, 0, -0.5]} rotation={[0, 0, -0.3]}>
         <boxGeometry args={[1, 0.25, 0.2]} />
-        <meshStandardMaterial 
-          color="#FFFFFF" 
-          emissive="#FFFFFF"
-          emissiveIntensity={0.1}
+        <meshBasicMaterial 
+          color="#FFFFFF"
         />
       </mesh>
       
@@ -260,9 +247,7 @@ function FallbackSpaceship(props) {
       <mesh position={[-1.2, 0, 0]}>
         <cylinderGeometry args={[0.15, 0.2, 0.3]} />
         <meshBasicMaterial 
-          color="#00BFFF" 
-          emissive="#00BFFF"
-          emissiveIntensity={1.0}
+          color="#00BFFF"
         />
       </mesh>
       
@@ -284,7 +269,7 @@ function FallbackSpaceship(props) {
           ]}
         >
           <cylinderGeometry args={[0.02, 0.02, 0.2]} />
-          <meshBasicMaterial color="#FF0000" emissive="#FF0000" emissiveIntensity={0.5} />
+          <meshBasicMaterial color="#FF0000" />
         </mesh>
       ))}
     </group>
