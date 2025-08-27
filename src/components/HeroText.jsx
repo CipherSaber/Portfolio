@@ -4,97 +4,70 @@ import { motion } from "motion/react";
 const HeroText = () => {
   const words = ["CyberSecurity", "AI", "Web Development"];
   const variants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
   };
+
   return (
-    <div className="z-10 mt-20 text-center md:mt-40 md:text-left rounded-3xl bg-clip-text">
-      {/* Desktop View */}
-      <div className="flex-col hidden md:flex c-space">
-        <motion.h1
-          className="text-4xl font-medium"
+    <div className="space-y-6 lg:space-y-8">
+      {/* Greeting */}
+      <motion.h1
+        className="text-2xl sm:text-3xl lg:text-4xl font-light text-white/90"
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.2, duration: 0.8 }}
+      >
+        Hi, I'm Jacob Ashirwad
+      </motion.h1>
+
+      {/* Main Title */}
+      <div className="space-y-2 lg:space-y-4">
+        <motion.h2
+          className="text-3xl sm:text-4xl lg:text-5xl font-light text-white/80"
           variants={variants}
           initial="hidden"
           animate="visible"
-          transition={{ delay: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
         >
-          Hi I'm Jacob 
-        </motion.h1>
-        <br></br>
-        <div className="flex flex-col items-start">
-          <motion.p
-            className="text-5xl font-medium text-neutral-300"
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 1.2 }}
-          >
-            I Do <br />
-          </motion.p>
-          <motion.div
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 1.5 }}
-          >
-            <FlipWords
-              words={words}
-              className="font-black text-white text-8xl"
-            />
-          </motion.div>
-          <motion.p
-            className="text-4xl font-medium text-neutral-300"
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 1.8 }}
-          >
-          </motion.p>
-        </div>
-      </div>
-      {/* Mobile View */}
-      <div className="flex- flex-col space-y-6 md:hidden">
-        <motion.p
-          className="text-4xl font-medium"
+          I Do
+        </motion.h2>
+
+        <motion.h3
+          className="text-3xl sm:text-4xl lg:text-5xl font-light text-white/80"
           variants={variants}
           initial="hidden"
           animate="visible"
-          transition={{ delay: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
         >
-          Hi,I'm Jacob
-        </motion.p>
-        <div>
-          <motion.p
-            className="text-5xl font-black text-neutral-300"
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 1.2 }}
-          >
-          <br></br>
-            I Do
-          </motion.p>
-          <motion.div
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 1.5 }}
-          >
-            <FlipWords
-              words={words}
-              className="font-bold text-white text-7xl"
-            />
-          </motion.div>
-          <motion.p
-            className="text-4xl font-black text-neutral300"
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 1.8 }}
-          >
-          </motion.p>
-        </div>
+        </motion.h3>
       </div>
+
+      {/* Scalable Text with Animation */}
+      <motion.div
+        className="space-y-2"
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.8, duration: 0.8 }}
+      >
+        <FlipWords
+          words={words}
+          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight"
+        />
+        <p className="text-2xl sm:text-3xl lg:text-4xl font-light text-white/80">
+        </p>
+      </motion.div>
+
+      {/* Subtitle */}
+      <motion.p
+        className="text-lg sm:text-xl lg:text-2xl text-white/60 max-w-lg"
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 1.2, duration: 0.8 }}
+      >
+      </motion.p>
     </div>
   );
 };

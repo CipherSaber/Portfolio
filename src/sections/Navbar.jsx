@@ -1,35 +1,77 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-function Navigation() {
+function Navigation({ closeMenu }) {
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.substring(1);
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    
+    // Close mobile menu if it's open
+    if (closeMenu) {
+      closeMenu();
+    }
+  };
+
   return (
     <ul className="nav-ul">
       <li className="nav-li">
-        <a className="nav-link" href="#home">
+        <a 
+          className="nav-link" 
+          href="#home"
+          onClick={(e) => handleClick(e, '#home')}
+        >
           Home
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#about">
+        <a 
+          className="nav-link" 
+          href="#about"
+          onClick={(e) => handleClick(e, '#about')}
+        >
           About
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#work">
-          Work
+        <a 
+          className="nav-link" 
+          href="#work"
+          onClick={(e) => handleClick(e, '#work')}
+        >
+          Projects
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#experience">
+        <a 
+          className="nav-link" 
+          href="#experience"
+          onClick={(e) => handleClick(e, '#experience')}
+        >
           Experience
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#certifications">
+        <a 
+          className="nav-link" 
+          href="#certifications"
+          onClick={(e) => handleClick(e, '#certifications')}
+        >
           Certifications
         </a>
       </li>
       <li className="nav-li">
-        <a className="nav-link" href="#contact">
+        <a 
+          className="nav-link" 
+          href="#contact"
+          onClick={(e) => handleClick(e, '#contact')}
+        >
           Contact
         </a>
       </li>
@@ -72,7 +114,7 @@ const Navbar = () => {
           transition={{ duration: 1 }}
         >
           <nav className="pb-5">
-            <Navigation />
+            <Navigation closeMenu={() => setIsOpen(false)} />
           </nav>
         </motion.div>
       )}

@@ -7,8 +7,11 @@ import Experiences from "./sections/Experiences.jsx";
 import Certifications from "./sections/Certifications.jsx";
 import Contact from "./sections/Contact.jsx";
 import Footer from './sections/Footer.jsx';
+import WebGLErrorBoundary from './components/WebGLErrorBoundary.jsx';
+
 
 const App = () => {
+
   return (
     <div className="relative">
       {/* Navbar - Full width */}
@@ -17,7 +20,9 @@ const App = () => {
       </div>
       
       {/* Hero - Full width */}
-      <Hero />
+      <WebGLErrorBoundary>
+        <Hero />
+      </WebGLErrorBoundary>
       
       {/* Other sections - Contained width */}
       <div className="container mx-auto max-w-7xl relative">
